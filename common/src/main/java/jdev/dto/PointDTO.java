@@ -3,6 +3,8 @@ package jdev.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+
 public class PointDTO {
 
         private double lat;
@@ -38,6 +40,11 @@ public class PointDTO {
             return mapper.writeValueAsString(this);
         }
 
+        public PointDTO fromJson(final String str) throws IOException {
+            ObjectMapper mapper =new ObjectMapper();
+            PointDTO point = mapper.readValue(str, PointDTO.class);
+            return point;
+        }
         @Override
         public String toString() {
             return "jdev.dto.PointDTO{" +
