@@ -12,7 +12,6 @@ public class PointDTOTest {
         point.setLat(40);
         point.setLon(30);
         point.setAutoId("a012bcd");
-
         assertTrue(point.toJson().contains("\"lat\":40"));
     }
 }
