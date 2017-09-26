@@ -34,3 +34,9 @@ project(':tracker-ui') {
         compile project(':common')
     }
 }
+
+project(':tracker-core') {
+    dependencies {
+        compile project(':common')
+    }
+}
