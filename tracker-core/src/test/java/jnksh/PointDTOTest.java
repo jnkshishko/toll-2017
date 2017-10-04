@@ -1,4 +1,4 @@
-package jdev.dto;
+package jnksh;
 
 import org.junit.Test;
 

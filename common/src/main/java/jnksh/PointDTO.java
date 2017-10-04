@@ -1,4 +1,4 @@
-package jdev.dto;
+package jnksh;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +47,7 @@ public class PointDTO {
         }
         @Override
         public String toString() {
-            return "jdev.dto.PointDTO{" +
+            return "PointDTO{" +
                     "lat=" + lat +
                     ", lon=" + lon +
                     ", autoId='" + autoId + '\'' +
