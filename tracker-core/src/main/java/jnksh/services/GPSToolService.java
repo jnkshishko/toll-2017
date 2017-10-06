@@ -13,7 +13,7 @@ public class GPSToolService {
 
 
     public ArrayList<Coordinate> getGPS() {
-        System.out.println("hi");
+
         ArrayList<Coordinate> coordinateList = new ArrayList<Coordinate>();
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("17741.kml").getFile());
@@ -21,7 +21,7 @@ public class GPSToolService {
         final Kml kml = Kml.unmarshal(file);
         final Folder folder = (Folder) kml.getFeature();
         List<Feature> featureList = folder.getFeature();
-        Placemark placemark = null;
+        Placemark placemark;
 
         for (Feature f : featureList) {
 
