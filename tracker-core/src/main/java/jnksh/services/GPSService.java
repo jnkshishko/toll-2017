@@ -1,85 +1,73 @@
 package jnksh.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import de.micromata.opengis.kml.v_2_2_0.Coordinate;
+import de.micromata.opengis.kml.v_2_2_0.*;
 import jnksh.PointDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GPSService {
 
     private ArrayList<Coordinate> coordinateList;
-    private int count;
+    private int countRecord;
     private int size;
     private PointDTO record = new PointDTO();
+    public ArrayList<PointDTO> recordedCoordinates = new ArrayList<>();
 
+    public ArrayList<Coordinate> getGPS() {
 
-    @Autowired
-    private GPSToolService gpsToolService;
+        ArrayList<Coordinate> coordinateList = new ArrayList<Coordinate>();
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("17741.kml").getFile());
 
-    @Autowired
-    private DataPeekService peekService;
+        final Kml kml = Kml.unmarshal(file);
+        final Folder folder = (Folder) kml.getFeature();
+        List<Feature> featureList = folder.getFeature();
+        Placemark placemark;
 
-    @Autowired
-    private DataSendService sendService;
+        for (Feature f : featureList) {
 
+            if (f instanceof Placemark) {
+                placemark = (Placemark) f;
+                LineString lineString = (LineString) placemark.getGeometry();
+                List<Coordinate> coordinates = lineString.getCoordinates();
+                coordinateList.addAll(coordinates);
+            }
+
+        }
+
+        return coordinateList;
+    }
     @PostConstruct
     public void init() {
-        coordinateList = gpsToolService.getGPS();
+        coordinateList = getGPS();
         size = coordinateList.size();
     }
 
-    @Scheduled (cron = "${cron.prop.put}")
+    @Scheduled (cron = "${cron.prop.record}")
     private void track() {
 
+        int count = countRecord++;
         double currentLat;
         double currentLon;
-        double currentAlt;
 
         if (size > count) {
             Coordinate coordinate = coordinateList.get(count);
             currentLat = coordinate.getLatitude();
             currentLon = coordinate.getLongitude();
-            currentAlt = coordinate.getAltitude();
-
             record.setLat(currentLat);
             record.setLon(currentLon);
+            recordedCoordinates.add(record);
 
-
-            try {
-                peekService.put(record);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                peekService.take();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try {
-                sendService.coordinateSend.add(peekService.coordinatesForSend.get(count).toJson());
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            count++;
         }
 
     }
 
-    @Scheduled (cron = "${cron.prop.send}")
-    private void send() {
-//        System.out.println(peekService.coordinatesForSend);
-        try {
-            sendService.send();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
 }
