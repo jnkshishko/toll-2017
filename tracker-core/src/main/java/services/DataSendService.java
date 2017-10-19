@@ -17,17 +17,15 @@ public class DataSendService {
 
     private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
     final ArrayList<String> coordinateSend = new ArrayList<>();
-
+    int counter;
     @Scheduled (cron = "${cron.prop.send}")
     void send() throws JsonProcessingException{
 
-        int count = 0;
-
-        coordinateSend.add(peekService.coordinatesForSend.get(count++).toJson());
-        for (String a : coordinateSend) {
-            log.info(a);
+        int count = counter++;
+            coordinateSend.add(peekService.coordinatesForSend.get(count).toJson());
+            for (String a : coordinateSend) {
+                log.info(a);
+            }
         }
-
-    }
 
 }
