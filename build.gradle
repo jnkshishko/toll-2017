@@ -54,12 +54,20 @@ project(':tracker-ui') {
 }
 
 project(':tracker-core') {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+
     dependencies {
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
+        compile group: 'commons-io', name: 'commons-io', version: '2.5'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 }

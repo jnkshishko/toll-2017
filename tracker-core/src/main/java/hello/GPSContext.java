@@ -1,6 +1,9 @@
-import jnksh.services.DataPeekService;
-import jnksh.services.DataSendService;
-import jnksh.services.GPSService;
+package hello;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -9,23 +12,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
+@EnableAutoConfiguration
 @EnableScheduling
 @PropertySource("classpath:/application.properties")
+@ComponentScan({"hello","services"})
 public class GPSContext {
 
     @Bean
-    public DataPeekService peekService() {
-        return new DataPeekService();
-    }
-
-    @Bean
-    public DataSendService sendService() {
-        return new DataSendService();
-    }
-
-    @Bean
-    public GPSService gpsService() {
-        return new GPSService();
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
     }
 
     @Bean

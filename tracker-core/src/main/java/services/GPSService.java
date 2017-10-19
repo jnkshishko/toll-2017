@@ -1,4 +1,4 @@
-package jnksh.services;
+package services;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
 import jnksh.PointDTO;

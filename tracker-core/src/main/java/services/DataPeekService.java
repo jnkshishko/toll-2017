@@ -1,4 +1,4 @@
-package jnksh.services;
+package services;
 
 import jnksh.PointDTO;
 import org.slf4j.LoggerFactory;
