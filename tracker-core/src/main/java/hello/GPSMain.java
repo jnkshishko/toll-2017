@@ -1,7 +1,6 @@
 package hello;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class GPSMain {
@@ -12,7 +11,7 @@ public class GPSMain {
 //        ApplicationContext context = SpringApplication.run(GPSContext.class, args);
         SpringApplication app = new SpringApplication(GPSContext.class);
         app.setWebEnvironment(false);
-        ConfigurableApplicationContext ctx = app.run(args);
+        ConfigurableApplicationContext context = app.run(args);
     }
 
 }
