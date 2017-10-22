@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@ComponentScan({"hello","controllers"})
+@ComponentScan({"hello","controllers","services"})
 
 public class Application {
 
