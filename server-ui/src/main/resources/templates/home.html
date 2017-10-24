@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Домашняя страница</title>
+</head>
+<h1>Welcome!</h1>
+<body>
+<p>Кликните <a th:href="@{/registerClient}">здесь</a>, для регистрации клиента.</p>
+<p>Кликните <a th:href="@{/payments}">здесь</a>, для просмотра проплат.</p>
+<p>Кликните <a th:href="@{/routes}">здесь</a>, для просмотра маршрутов.</p>
+<p>Кликните <a th:href="@{/registerManager}">здесь</a>, для регистрации менеджера(доступно только для администратора).</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+</body>
+</html>
