@@ -2,7 +2,6 @@ package services;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
 import jnksh.PointDTO;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -48,8 +47,7 @@ public class GPSService {
         size = coordinateList.size();
     }
 
-    @Scheduled (cron = "${cron.prop.record}")
-    private void track() {
+    protected void track() {
 
         int count = countRecord++;
         double currentLat;

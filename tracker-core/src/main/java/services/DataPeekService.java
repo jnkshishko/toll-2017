@@ -1,5 +1,6 @@
 package services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jnksh.PointDTO;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class DataPeekService {
     @Autowired
     public GPSService gpsService;
 
+    @Autowired
+    public DataSendService dataSendService;
+
     private static final Logger log = LoggerFactory.getLogger(DataPeekService.class);
 
     private BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(100);
@@ -29,16 +33,16 @@ public class DataPeekService {
 
     @Scheduled (cron = "${cron.prop.put}")
     void put() throws InterruptedException {
+        gpsService.track();
         int i = putCount++;
         log.info("DataPeekService.put " + i);
 
         queue.put(gpsService.recordedCoordinates.get(i));
     }
-    @Scheduled (cron = "${cron.prop.take}")
-    void take() throws InterruptedException {
+    void take() throws JsonProcessingException, InterruptedException {
         int i = takeCount++;
         log.info("DataPeekService.take " + i);
-        coordinatesForSend.add(queue.take());
+        dataSendService.coordinateSend.add(queue.take().toJson());
     }
 
 }

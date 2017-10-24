@@ -20,13 +20,11 @@ public class ReceiveController {
 
     private static final Logger log = LoggerFactory.getLogger(ReceiveController.class);
 
-    @RequestMapping(value = "/coordinates", method = RequestMethod.PUT)
-    public void receiveCoords(@RequestBody String coordinates) throws IOException {
-        log.info(coordinates);
-//        ObjectMapper mapper = new ObjectMapper();
-//        PointDTO pointDTO = mapper.readValue(coordinates, PointDTO.class);
-//        log.info(pointDTO.toString());
+    @RequestMapping(value = "/coordinates", method = RequestMethod.POST)
+    public String receiveCoords(@RequestBody String coordinates) throws IOException {
+//        log.info(coordinates);
         writeToFile.write(coordinates);
+        return "{status: ok}";
         }
 
 

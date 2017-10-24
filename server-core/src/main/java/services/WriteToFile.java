@@ -27,12 +27,5 @@ public class WriteToFile {
             fileWriter.close();
             log.info("Координата записана " + pointDTO.toString());
         }
-//        try {
-//            PrintWriter printWriter = new PrintWriter(file);
-//            printWriter.println(pointDTO.toString());
-//            log.info("Координата записана в файл - " + coordinates);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
     }
 }

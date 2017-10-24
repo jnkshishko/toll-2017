@@ -21,23 +21,20 @@ public class DataSendService {
 
     private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
     final LinkedList<String> coordinateSend = new LinkedList<>();
-    int counter;
     int sendCounter;
+    String response;
     @Scheduled (cron = "${cron.prop.send}")
     void send() throws JsonProcessingException {
 
-        int count = counter++;
-        coordinateSend.add(peekService.coordinatesForSend.get(count).toJson());
+        try {
+            peekService.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int i = sendCounter++;
         String a = coordinateSend.get(i);
-        restTemplate.put("http://localhost:8080/coordinates", a);
-        log.info(a);
-//        for (String a : coordinateSend) {
-//            log.info(a);
-//            restTemplate.put("http://localhost:8080/coordinates", a);
-//
-//        }
-
+        response = restTemplate.postForObject("http://localhost:8080/coordinates", a, String.class);
+        log.info(response);
     }
 
 }
