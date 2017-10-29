@@ -19,12 +19,9 @@ public class DataPeekService {
     @Autowired
     public GPSService gpsService;
 
-    @Autowired
-    public DataSendService dataSendService;
-
     private static final Logger log = LoggerFactory.getLogger(DataPeekService.class);
 
-    private BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(100);
+    BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(100);
     private int putCount;
     private int takeCount;
 
@@ -39,10 +36,11 @@ public class DataPeekService {
 
         queue.put(gpsService.recordedCoordinates.get(i));
     }
-    void take() throws JsonProcessingException, InterruptedException {
+
+    String take() throws JsonProcessingException, InterruptedException {
         int i = takeCount++;
         log.info("DataPeekService.take " + i);
-        dataSendService.coordinateSend.add(queue.take().toJson());
+        return queue.take().toJson();
     }
 
 }

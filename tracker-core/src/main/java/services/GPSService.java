@@ -42,12 +42,12 @@ public class GPSService {
         return coordinateList;
     }
     @PostConstruct
-    public void init() {
+    protected void init() {
         coordinateList = getGPS();
         size = coordinateList.size();
     }
 
-    protected void track() {
+    void track() {
 
         int count = countRecord++;
         double currentLat;

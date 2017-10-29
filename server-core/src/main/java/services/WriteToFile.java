@@ -11,9 +11,14 @@ import java.io.*;
 @Service
 public class WriteToFile {
     private static final Logger log = LoggerFactory.getLogger(WriteToFile.class);
+    File file;
 
+    public WriteToFile () {
+        this.file = new File("server-core/src/main/resources/gps.txt");
+
+    }
     public void write(String coordinates) throws IOException {
-        File file = new File("server-core/src/main/resources/gps.txt");
+//        File file = new File("server-core/src/main/resources/gps.txt");
         ObjectMapper mapper = new ObjectMapper();
         PointDTO pointDTO = mapper.readValue(coordinates, PointDTO.class);
         FileWriter fileWriter = null;
