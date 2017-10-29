@@ -16,8 +16,12 @@ public class DataSendService {
     @Autowired
     DataPeekService peekService;
 
-    @Autowired
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+
+
+    public DataSendService(@Autowired RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
     final LinkedList<String> coordinateSend = new LinkedList<>();

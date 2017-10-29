@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
 
+import javax.xml.crypto.Data;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
