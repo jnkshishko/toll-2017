@@ -13,31 +13,25 @@ import java.util.LinkedList;
 @Service
 public class DataSendService {
 
-    @Autowired
-    DataPeekService peekService;
-
     private final RestTemplate restTemplate;
+    private final DataPeekService peekService;
 
-
-    public DataSendService(@Autowired RestTemplate restTemplate) {
+    public DataSendService(@Autowired RestTemplate restTemplate, @Autowired DataPeekService peekService) {
         this.restTemplate = restTemplate;
+        this.peekService = peekService;
     }
 
     private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
-    final LinkedList<String> coordinateSend = new LinkedList<>();
-    int sendCounter;
-    String response;
-    @Scheduled (cron = "${cron.prop.send}")
-    String send() throws JsonProcessingException {
 
-        try {
-            coordinateSend.add(peekService.take());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        int i = sendCounter++;
-        String a = coordinateSend.get(i);
-        response = restTemplate.postForObject("http://localhost:8080/coordinates", a, String.class);
+    String response;
+
+    String nextCoord;
+
+    @Scheduled (cron = "${cron.prop.send}")
+    String send() throws InterruptedException, JsonProcessingException {
+
+        nextCoord = peekService.take();
+        response = restTemplate.postForObject("http://localhost:8080/coordinates", nextCoord, String.class);
         log.info(response);
         return response;
     }

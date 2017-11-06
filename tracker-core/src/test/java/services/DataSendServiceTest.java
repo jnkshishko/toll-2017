@@ -35,9 +35,9 @@ public class DataSendServiceTest {
         pointDTO.setLon(135.5);
         pointDTO.setLat(133.3);
         peek.queue.put(pointDTO);
-        String a = peek.queue.take().toJson();
-        when(peekService.take()).thenReturn(a);
-        when(restTemplate.postForObject("http://localhost:8080/coordinates", a, String.class)).thenReturn("ok");
+        String b = peek.queue.take().toJson();
+        when(peekService.take()).thenReturn(b);
+        when(restTemplate.postForObject("http://localhost:8080/coordinates", b, String.class)).thenReturn("ok");
         String result = mockedSendService.send();
         assertEquals("ok", result);
     }
