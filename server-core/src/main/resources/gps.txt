@@ -6,3 +6,13 @@ PointDTO{lat=44.147326, lon=135.646702, autoId='null'}
 PointDTO{lat=44.148993, lon=135.646546, autoId='null'}
 PointDTO{lat=44.149834, lon=135.645843, autoId='null'}
 PointDTO{lat=120.1, lon=130.1, autoId='null'}
+PointDTO{lat=44.144147, lon=135.647018, autoId='null'}
+PointDTO{lat=44.144975, lon=135.647873, autoId='null'}
+PointDTO{lat=44.146245, lon=135.647429, autoId='null'}
+PointDTO{lat=44.146859, lon=135.647364, autoId='null'}
+PointDTO{lat=44.147326, lon=135.646702, autoId='null'}
+PointDTO{lat=44.148993, lon=135.646546, autoId='null'}
+PointDTO{lat=44.149834, lon=135.645843, autoId='null'}
+PointDTO{lat=44.150346, lon=135.645356, autoId='null'}
+PointDTO{lat=44.151352, lon=135.644921, autoId='null'}
+PointDTO{lat=44.152095, lon=135.643539, autoId='null'}

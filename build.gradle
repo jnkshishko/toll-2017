@@ -67,7 +67,9 @@ project(':tracker-core') {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf"){
+            exclude module: "spring-boot-starter-tomcat"
+        }
         compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'

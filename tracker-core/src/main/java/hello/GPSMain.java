@@ -7,9 +7,8 @@ public class GPSMain {
 
     public static void main(String... args){
 
-        SpringApplication app = new SpringApplication(GPSContext.class);
-        app.setWebEnvironment(false);
-        ConfigurableApplicationContext context = app.run(args);
+        SpringApplication.run(GPSContext.class, args);
+
     }
 
 }
