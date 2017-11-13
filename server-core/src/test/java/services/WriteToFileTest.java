@@ -12,7 +12,8 @@ public class WriteToFileTest {
     @Test
     public void write() throws Exception {
 
-        WriteToFile writeToFile = new WriteToFile();
+        String path = "src/main/resources/gps.txt";
+        WriteToFile writeToFile = new WriteToFile(path);
         PointDTO pointDTO = new PointDTO();
         pointDTO.setLon(130.1);
         pointDTO.setLat(120.1);

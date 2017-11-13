@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jnksh.PointDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -12,8 +14,11 @@ import java.io.*;
 public class WriteToFile {
     private static final Logger log = LoggerFactory.getLogger(WriteToFile.class);
     protected File file;
-    public WriteToFile () {
-        this.file = new File("server-core/src/main/resources/gps.txt");
+
+    @Autowired
+    public WriteToFile (@Value("server-core/src/main/resources/gps.txt")String path) {
+        this.file = new File(path);
+
     }
      public boolean write(String coordinates) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
