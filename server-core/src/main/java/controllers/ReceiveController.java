@@ -17,8 +17,6 @@ import java.io.*;
 @RestController
 public class ReceiveController {
 
-//    @Autowired
-//    public WriteToFile writeToFile;
     private PointDTO newPoint = new PointDTO();
 
     @Autowired
