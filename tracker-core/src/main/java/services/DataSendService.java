@@ -30,7 +30,7 @@ public class DataSendService {
     @Scheduled (cron = "${cron.prop.send}")
     String send() throws InterruptedException, JsonProcessingException {
 
-        nextCoord = peekService.take();
+        nextCoord = peekService.take().toJson();
         response = restTemplate.postForObject("http://localhost:8080/coordinates", nextCoord, String.class);
         log.info(response);
         return response;

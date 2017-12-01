@@ -2,14 +2,34 @@ package jnksh;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import javax.persistence.*;
 import java.io.IOException;
+
+import static javax.persistence.GenerationType.AUTO;
+
+
+@Entity
+@Table(name = "COORDINATES")
 
 public class PointDTO {
 
-        private double lat;
-        private double lon;
-        private String autoId;
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    @Column(name = "ID")
+    int id;
+
+    @Column(name = "LAT")
+    double lat;
+
+    @Column(name = "LON")
+    double lon;
+
+    @Column(name = "AUTO_ID")
+    String autoId;
+
+//        private double lat;
+//        private double lon;
+//        private String autoId;
 
         public double getLat() {
             return lat;

@@ -16,7 +16,7 @@ public class WriteToFile {
     protected File file;
 
     @Autowired
-    public WriteToFile (@Value("server-core/src/main/resources/gps.txt")String path) {
+    public WriteToFile (@Value("${out.file.path}")String path) {
         this.file = new File(path);
 
     }
