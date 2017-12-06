@@ -5,11 +5,18 @@ import jnksh.PointDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class PointDTOCRUD {
 
-    @Autowired
+    private ArrayList<PointDTO> list = new ArrayList<>();
+
     private PointDTORepository pointDTORepository;
+
+    public PointDTOCRUD(@Autowired PointDTORepository pointDTORepository) {
+        this.pointDTORepository = pointDTORepository;
+    }
 
     public void delete(PointDTO point) {
         pointDTORepository.delete(point);
@@ -33,6 +40,18 @@ public class PointDTOCRUD {
         pointset.setLon(point.getLon());
         pointset.setAutoId(point.getAutoId());
         return pointDTORepository.save(pointset);
+    }
+
+
+    public ArrayList<PointDTO> getFiveLast() {
+        System.out.println("11");
+        list.add(pointDTORepository.findOne((int)pointDTORepository.count()));
+        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-1));
+        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-2));
+        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-3));
+        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-4));
+
+        return list;
     }
 }
 

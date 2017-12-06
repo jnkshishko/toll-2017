@@ -12,6 +12,12 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DataSendService {
 
+    private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
+
+    private String response;
+
+    private String nextCoord;
+
     private final RestTemplate restTemplate;
     private final DataPeekService peekService;
 
@@ -19,12 +25,6 @@ public class DataSendService {
         this.restTemplate = restTemplate;
         this.peekService = peekService;
     }
-
-    private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
-
-    String response;
-
-    String nextCoord;
 
     @Scheduled (cron = "${cron.prop.send}")
     String send() throws InterruptedException, JsonProcessingException {

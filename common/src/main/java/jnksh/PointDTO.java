@@ -16,20 +16,16 @@ public class PointDTO {
     @Id
     @GeneratedValue(strategy = AUTO)
     @Column(name = "ID")
-    int id;
+    private int id;
 
     @Column(name = "LAT")
-    double lat;
+    private double lat;
 
     @Column(name = "LON")
-    double lon;
+    private double lon;
 
     @Column(name = "AUTO_ID")
-    String autoId;
-
-//        private double lat;
-//        private double lon;
-//        private String autoId;
+    private String autoId;
 
         public double getLat() {
             return lat;
