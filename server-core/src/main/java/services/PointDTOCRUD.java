@@ -18,6 +18,10 @@ public class PointDTOCRUD {
         this.pointDTORepository = pointDTORepository;
     }
 
+    public PointDTOCRUD() {
+
+    }
+
     public void delete(PointDTO point) {
         pointDTORepository.delete(point);
     }
@@ -52,6 +56,10 @@ public class PointDTOCRUD {
         list.add(pointDTORepository.findOne((int)pointDTORepository.count()-4));
 
         return list;
+    }
+
+    public int count() {
+        return (int)pointDTORepository.count();
     }
 }
 
