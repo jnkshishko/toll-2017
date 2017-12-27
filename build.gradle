@@ -1,5 +1,6 @@
 subprojects{
     apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
     repositories {
         mavenCentral()
         mavenLocal()
@@ -15,8 +16,9 @@ project(':common') {
     dependencies{
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
         compile group: 'com.h2database', name: 'h2', version: '1.4.196'
-        // https://mvnrepository.com/artifact/javax.persistence/persistence-api
-        compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+// https://mvnrepository.com/artifact/javax.persistence/persistence-api
+// compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
 
 
     }
@@ -84,9 +86,9 @@ project(':tracker-core') {
         compile group: 'com.h2database', name: 'h2', version: '1.4.196'
         compile project(':common')
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
-        // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         compile group: 'commons-io', name: 'commons-io', version: '2.5'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'

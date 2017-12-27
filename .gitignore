@@ -79,3 +79,4 @@ gradle/
 gradlew
 gradlew.bat
 !/common/src/main/java/jdev/dto/PointDTO.java
+/JavaApplication1/nbproject/private/
