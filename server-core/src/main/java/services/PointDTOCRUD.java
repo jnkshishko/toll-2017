@@ -3,6 +3,8 @@ package services;
 import dao.repo.PointDTORepository;
 import jnksh.PointDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -47,15 +49,13 @@ public class PointDTOCRUD {
     }
 
 
-    public ArrayList<PointDTO> getFiveLast() {
-        System.out.println("11");
-        list.add(pointDTORepository.findOne((int)pointDTORepository.count()));
-        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-1));
-        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-2));
-        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-3));
-        list.add(pointDTORepository.findOne((int)pointDTORepository.count()-4));
+    public List<PointDTO> getLastChosenPoints(int points) {
 
-        return list;
+        org.springframework.data.domain.Pageable pageable = new PageRequest(0, points);
+        Page<PointDTO> pointDTOPage = pointDTORepository.findAll(pageable);
+
+        return pointDTOPage.getContent();
+
     }
 
     public int count() {

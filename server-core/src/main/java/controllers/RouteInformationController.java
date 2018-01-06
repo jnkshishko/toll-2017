@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import services.PointDTOCRUD;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class RouteInformationController {
 
-    private ArrayList<PointDTO> list;
+    private List<PointDTO> list;
     private String response;
 
 
@@ -28,7 +28,7 @@ public class RouteInformationController {
     @RequestMapping(name = "/getLastPoints", method = RequestMethod.POST)
     public String getLastPoints(@RequestBody String str) {
 
-        list = crud.getFiveLast();
+        list = crud.getLastChosenPoints(5);
         try {
             response = list.get(0).toJson() +
                     list.get(1).toJson() +
